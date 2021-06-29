@@ -96,10 +96,10 @@ intro: |
 
 #An additional info freetext section is optional at the bottom of the page - can be text or HTML
 skillsresume: |
-   <strong>Software</strong>: Extensive: Anaconda3, ArcGIS Desktop (ArcMap), ArcGIS Online, ArcGIS Pro, Maptionnaire, Microsoft Office Suite, QGIS. Proficient: Adobe Creative Suite, ArcGIS Enterprise, CyberDuck, GRASS, iD (MapBox), jamovi, Leaflet, MapInfo Pro, MATLAB, RStudio, SPSS, Visual Studio 
-   <strong>Programming Languages</strong>: Extensive: Python, SQL.  
-   <strong>Operating Systems</strong>: Extensive: macOS, Windows. Proficient: MATLAB, R
-   <strong>Modeling</strong>: Extensive: ArcGIS Model Builder, HAZUS. Proficient: HEC-GeoHMS, HEC-RAS, SWMM
+   <strong>Software</strong>: Extensive - Anaconda3, ArcGIS Desktop (ArcMap), ArcGIS Online, ArcGIS Pro, Maptionnaire, Microsoft Office Suite, QGIS. Proficient - Adobe Creative Suite, ArcGIS Enterprise, CyberDuck, GRASS, iD (MapBox), jamovi, Leaflet, MapInfo Pro, MATLAB, RStudio, SPSS, Visual Studio 
+   <strong>Programming Languages</strong>: Extensive - Python, SQL.  
+   <strong>Operating Systems</strong>: Extensive - macOS, Windows. Proficient - MATLAB, R
+   <strong>Modeling</strong>: Extensive - ArcGIS Model Builder, HAZUS. Proficient - HEC-GeoHMS, HEC-RAS, SWMM
    <strong>Methodological</strong>: Cartographic development, geodata processing and visualization, hazard assessment, scientific graphic development, social vulnerability assessment, statistical analysis, transdisciplinary research, data management, data standards development
    <strong>Interpersonal</strong>: Autodidactic and detail-orientated team player. Dedicated worker willing to share and teach associates. Disciplined problem solver with limited need for supervision.
 additionalinfo: |
