@@ -1,6 +1,7 @@
 # Site settings
 title: Harris Bienn
 name: Harris Bienn
+email: harris.bienn@gmail.com
 
 # Build settings
 markdown: kramdown
