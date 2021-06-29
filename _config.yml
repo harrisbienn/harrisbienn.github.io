@@ -32,12 +32,12 @@ roles:
    start: 2014
    end: Ongoing
    employer: The Water Institute of the Gulf, Baton Rouge, Louisiana
-   description: Role requirements: Geospatial analysis, research, and narrative building for scientific communication. Data visualization and cartographic development. Administration of web GIS platforms and quality control of geospatial products.
+   description: Role requirements - Geospatial analysis, research, and narrative building for scientific communication. Data visualization and cartographic development. Administration of web GIS platforms and quality control of geospatial products.
  - title: Process Technician
    start: 2012
    end: 2014
    employer: Jacobs Engineering, Exxon Refinery Alliance Group, Baton Rouge, Louisiana
-   description: Role requirements: Intensive analytical research on major turnaround projects for Exxon. Upstream and downstream communication and ideation.
+   description: Role requirements - Intensive analytical research on major turnaround projects for Exxon. Upstream and downstream communication and ideation.
  - title: Infantry Section Leader, Weapons Platoon Sergeant
    start: 2008
    end: 2012
@@ -51,7 +51,7 @@ education:
    subject: Environmental Engineering
    school: Louisiana State University
    thesis: Assessing the Impact of Urban Flooding on Vulnerable Populations in New Orleans using the Internet of Things
-   level: Honors Graduate
+ - level: Honors Graduate
    date: 2011
    subject: Infantry Squad Leaders Course
    school: United States Marine Corps Leadership Academy
