@@ -1,22 +1,32 @@
-# NerdAbility - A CV Generator
-A Jekyll based CV page generator based on the user profile page on Nerdability.
+# Harris Bienn CV
 
-A few years agao I helped create a devloper CV webapp that let users sign up and connect lots of online footprints to make a dynamic online CV (formerly nerdability.com, now parked at: http://nerdability.github.io/ ), and I thought why not just create a static site generated version that re-created the user profile CV.  Luckily, GitHub provides native support for Jekyll sites as part of its user pages (https://{{yourusername}}.github.io), so as well as hosting the Jekyll project on GitHub, it also automatically builds and serves the site for you on a nice share-able URL.
+This repository is the source for [harrisbienn.github.io](https://harrisbienn.github.io). One validated YAML file drives the public website, printable PDF, and Markdown export.
 
+## Source of truth
 
-## Making your own CV
+Edit `cv/Harris_Bienn_CV.yaml`. Do not edit generated files in `dist/`.
 
-To make your own GitHub hosted CV:
+RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines, present specialties as a Shields.io-enhanced capability grid, and load live GitHub project cards. All professional content remains available without JavaScript or third-party badge assets.
 
-1. Fork this repo into your github account 
-2. Click the "Settings" button in your new forked repository (in the menu on the right), and change the repository's name to {{yourusername}}.github.io, replacing yourusername with your GitHub user name.
-3. Update /_config.yml with the details of your CV - the comments will explain what is required
-4. Visit https://{{yourusername}}.github.io to check it out
-5. Share your new CV/Profile with the world!
+## Build
 
+The project uses a container so the host does not need Python, Typst, RenderCV, or their dependencies.
 
-If you want to test it locally, install Ruby & Jekyll, clone the repository locally and run "jekyll serve" from the repo root directoy.
+```sh
+make build
+make verify
+```
 
-If you want to host the page on your own web hosting, you will need to run it locally and jekyll will build the site files to the /_site directory which you can then push to your hosting provider - See https://jekyllrb.com/ for details.
+Set `CONTAINER_ENGINE=podman` when Podman is preferred over Docker.
 
+Open `dist/index.html` after a successful build. The output directory also contains `Harris_Bienn_CV.pdf`, `Harris_Bienn_CV.md`, and the intermediate Typst file.
 
+## Content review
+
+The first normalized draft intentionally omits street address, phone number, and references from the public source. Editorial discrepancies and suggested next updates are tracked in `docs/content-review.md`.
+
+## Deployment
+
+The GitHub Actions workflow validates pull requests and deploys pushes to `master` through GitHub Pages. GitHub Pages must use GitHub Actions as its deployment source. The generated `dist/` directory is uploaded as an artifact and is never committed.
+
+The previous Jekyll site remains recoverable from the repository history. See `docs/migration.md` for the cutover checklist and rollback point.
