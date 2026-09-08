@@ -51,7 +51,7 @@ jobs:
           echo "### Built source: \`harrisbienn/unified-cv@$source_sha\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: source/dist
 
