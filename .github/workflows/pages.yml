@@ -1,16 +1,23 @@
-name: Build and deploy CV
+name: Publish central CV
 
 on:
   push:
     branches:
       - master
   pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: "17 * * * *"
   workflow_dispatch:
+    inputs:
+      source_ref:
+        description: unified-cv branch, tag, or commit to publish
+        required: false
+        default: main
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -19,28 +26,40 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      source_sha: ${{ steps.source.outputs.sha }}
     steps:
-      - name: Check out repository
+      - name: Check out central CV source
         uses: actions/checkout@v6
+        with:
+          repository: harrisbienn/unified-cv
+          ref: ${{ github.event.inputs.source_ref || 'main' }}
+          path: source
+          persist-credentials: false
 
       - name: Build CV and website
-        run: make build
+        run: make -C source build
 
       - name: Verify generated outputs
-        run: make verify
+        run: make -C source verify
 
-      - name: Configure GitHub Pages
-        if: github.event_name != 'pull_request'
-        uses: actions/configure-pages@v5
+      - name: Record source revision
+        id: source
+        run: |
+          source_sha=$(git -C source rev-parse HEAD)
+          echo "sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "### Built source: \`harrisbienn/unified-cv@$source_sha\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload GitHub Pages artifact
-        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: source/dist
 
   deploy:
     if: github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -50,3 +69,7 @@ jobs:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Record deployed source
+        run: |
+          echo "### Deployed source: \`harrisbienn/unified-cv@${{ needs.build.outputs.source_sha }}\`" >> "$GITHUB_STEP_SUMMARY"
