@@ -1,9 +1,9 @@
 # Repository guidance
 
-This repository treats `cv/Harris_Bienn_CV.yaml` as the canonical CV source.
+This repository is the thin GitHub Pages publisher for `harrisbienn/unified-cv`.
 
-- Build and validate through the container workflow in `Makefile`.
-- Do not install RenderCV or its dependencies on the host.
-- Generated files belong in `dist/` and are not committed.
-- Keep public-site enhancements progressive: the CV must remain complete and readable when JavaScript or the GitHub API is unavailable.
-- Do not publish street addresses, phone numbers, or professional references without explicit approval.
+- Make CV content, template, site, and build changes in `harrisbienn/unified-cv`, never here.
+- Keep this repository limited to deployment plumbing and its runbook.
+- Preserve the split permissions between the source-building job and the Pages deployment job.
+- Validate workflow changes through a pull request before merging them to `master`.
+- Never commit generated Pages artifacts.

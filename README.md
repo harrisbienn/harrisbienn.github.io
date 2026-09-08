@@ -1,32 +1,31 @@
 # Harris Bienn CV
 
-This repository is the source for [harrisbienn.github.io](https://harrisbienn.github.io). One validated YAML file drives the public website, printable PDF, and Markdown export.
+This repository owns the account-root deployment at [harrisbienn.github.io](https://harrisbienn.github.io). It intentionally contains only the GitHub Pages publishing workflow and its runbook.
 
 ## Source of truth
 
-Edit `cv/Harris_Bienn_CV.yaml`. Do not edit generated files in `dist/`.
+CV content, templates, site assets, and build tooling live in [`harrisbienn/unified-cv`](https://github.com/harrisbienn/unified-cv). Edit `cv/Harris_Bienn_CV.yaml` there; do not copy source or generated files into this repository.
 
-RenderCV 2.8 provides the schema, validation, and document renderers. The custom template at `cv/html/Full.html` wraps RenderCV's HTML output in the portfolio layout. Client-side enhancements turn professional experience and education and training into collapsed vertical timelines, present specialties as a Shields.io-enhanced capability grid, and load live GitHub project cards. All professional content remains available without JavaScript or third-party badge assets.
+The publisher checks out `unified-cv/main`, runs its containerized build and verification, uploads the resulting `dist/` artifact, and deploys it through GitHub Pages. Build failures stop before deployment, so the last successful site remains live.
 
-## Build
+## Publishing
 
-The project uses a container so the host does not need Python, Typst, RenderCV, or their dependencies.
+The workflow runs in three situations:
+
+- hourly at 17 minutes past the hour, picking up approved changes from `unified-cv/main`;
+- after changes to this repository's `master` branch; and
+- on manual dispatch, optionally targeting a central branch, tag, or commit.
+
+To publish immediately after merging a central change:
 
 ```sh
-make build
-make verify
+gh workflow run pages.yml --repo harrisbienn/harrisbienn.github.io -f source_ref=main
 ```
 
-Set `CONTAINER_ENGINE=podman` when Podman is preferred over Docker.
+The workflow uses only this repository's built-in `GITHUB_TOKEN`. The build job can read public source but cannot deploy; the isolated deploy job receives only `pages: write` and `id-token: write`.
 
-Open `dist/index.html` after a successful build. The output directory also contains `Harris_Bienn_CV.pdf`, `Harris_Bienn_CV.md`, and the intermediate Typst file.
+## Recovery
 
-## Content review
+Dispatch the workflow with a known-good `unified-cv` commit SHA to roll back the live site. Dispatch it with `source_ref=main` to return to the latest approved version.
 
-The first normalized draft intentionally omits street address, phone number, and references from the public source. Editorial discrepancies and suggested next updates are tracked in `docs/content-review.md`.
-
-## Deployment
-
-The GitHub Actions workflow validates pull requests and deploys pushes to `master` through GitHub Pages. GitHub Pages must use GitHub Actions as its deployment source. The generated `dist/` directory is uploaded as an artifact and is never committed.
-
-The previous Jekyll site remains recoverable from the repository history. See `docs/migration.md` for the cutover checklist and rollback point.
+See [`docs/deployment.md`](docs/deployment.md) for deployment checks, failure recovery, and rollback details.
